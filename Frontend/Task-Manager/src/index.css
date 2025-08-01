@@ -1,25 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --background-color: #f1f1f1;
-  --background-surface:#c4c4c4;
-  --text-color: #333;
-  --text-color-light: #666;
-  
-  --font-display: "Poppins", sans-serif;
+  --primary-color: #6fc5ff; /* Soft Sky Blue */
+  --secondary-color: #b0e0e6; /* Pale Turquoise */
+  --background-color: #f9f9f9; /* Almost white */
+  --background-surface: #eaeaea; /* Light grey for cards/surfaces */
+  --text-color: #222; /* Slightly off-black for better readability */
+  --text-color-light: #666; /* Muted grey for secondary text */
+
+  --font-display: "Plus Jakarta Sans", sans-serif; /* Clean, modern font */
   --breakpoint-3xl: 1920px;
 }
 
 .dark {
-  --primary-color: #2ecc71;
-  --secondary-color: #3498db;
-  --background-color: #333;
-  --background-surface:#1a1a1a;
-  --text-color: #fff;
-  --text-color-light: #ccc;
+  --primary-color: #6fc5ff; /* Keep primary color same for contrast */
+  --secondary-color: #4682b4; /* Steel Blue for contrast in dark */
+  --background-color: #121212; /* Dark background */
+  --background-surface: #1e1e1e; /* Slightly lighter than bg */
+  --text-color: #f1f1f1; /* Light text */
+  --text-color-light: #aaa; /* Subtle grey for muted text */
 }
 
 @layer base {
@@ -31,32 +31,51 @@
     background-color: var(--background-color);
     font-family: var(--font-display);
     color: var(--text-color);
+    transition: all .5s ease-in-out;
     /* Consider removing this unless you *want* to block scroll */
-    overflow: hidden;
   }
 
-  .bg-color{
+  .bg-color {
     background-color: var(--background-color);
   }
-.bg-surface{
-  background-color: var(--background-surface);
-}
-  .primary-color {
-    color: var(--primary-color);
+  .bg-surface {
+    background-color: var(--background-surface);
   }
-
-  .secondary-color {
-    color: var(--secondary-color);
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+  .text-theme {
+    color: var(--text-color);
   }
 
   .text-color-light {
     color: var(--text-color-light);
   }
+  /* FONTS SIZE */
+  .title-font-size {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: var(--primary-color);
+  }
 
+  .headline-font-size {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+  }
+  .description-font-size {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+  }
+  .metadata-font-size {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+  }
+
+  .input-style {
+    outline: none;
+    border-bottom: 1px solid var(--primary-color);
+  }
 }
 
 @layer utilities {
   .shadow {
-    box-shadow: inset 5px 5px 5px var(--background-surface), 5px 5px 5px var(--background-surface);
+    box-shadow: inset 5px 5px 10px var(--background-surface),
+      5px 5px 10px var(--background-surface);
   }
 }
