@@ -141,7 +141,7 @@ const updateUserProfile = async (req, res) => {
       email: updateUser.email,
       password: updateUser.password,
       role: updateUser.role,
-      token: generateToken(updateUser._id)
+      token: generateToken(updateUser._id),
     });
   } catch (error) {
     return res
