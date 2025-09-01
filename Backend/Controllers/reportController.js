@@ -9,8 +9,8 @@ const excelJs = require("exceljs");
 const exportTasksReport = async (req, res) => {
   try {
     const tasks = await Task.find().populate("assignedTo", "name email");
-    const users = new excelJs.Workbook();
-    const worksheet = users.addWorksheet("Tasks Report");
+    const workbook = new excelJs.Workbook();
+    const worksheet = workbook.addWorksheet("Tasks Report");
 
     worksheet.columns = [
       { header: "Task ID", key: "_id", width: 25 },
@@ -19,7 +19,7 @@ const exportTasksReport = async (req, res) => {
       { header: "Priority", key: "priority", width: 15 },
       { header: "Status", key: "status", width: 20 },
       { header: "Due Date", key: "dueDate", width: 20 },
-      { header: "Assigned To", key: "assignedTo.name", width: 30 },
+      { header: "Assigned To", key: "assignedTo", width: 30 },
     ];
 
     tasks.forEach((task) => {
@@ -32,7 +32,7 @@ const exportTasksReport = async (req, res) => {
         description: task.description,
         priority: task.priority,
         status: task.status,
-        dueDate: task.dueDate.toISOString().split("T")[0],
+        dueDate: task.dueDate ? task.dueDate.toISOString().split("T")[0] : "",
         assignedTo: assignedTo || "Unassigned",
       });
     });
@@ -45,7 +45,7 @@ const exportTasksReport = async (req, res) => {
       "Content-Disposition",
       "attachment; filename=TasksReport.xlsx"
     );
-    return worksheet.xlsx.write(res).then(() => {
+    return workbook.xlsx.write(res).then(() => {
       res.end();
     });
   } catch (error) {
@@ -56,7 +56,7 @@ const exportTasksReport = async (req, res) => {
 };
 
 //@desc  Export all user-task report  as Excel file
-//@route  POST /api/reports/export/user
+//@route  POST /api/reports/export/users
 //@access Private (Admin)
 
 const exportUsersReport = async (req, res) => {
@@ -66,6 +66,7 @@ const exportUsersReport = async (req, res) => {
       "assignedTo",
       "name email _id"
     );
+
     const userTaskMap = {};
     users.forEach((user) => {
       userTaskMap[user._id] = {
@@ -77,15 +78,24 @@ const exportUsersReport = async (req, res) => {
         completedTasks: 0,
       };
     });
+
     userTasks.forEach((task) => {
       if (task.assignedTo) {
-        task.assignedTo.forEach((assignedUser) => {
+        const assignedUsers = Array.isArray(task.assignedTo)
+          ? task.assignedTo
+          : [task.assignedTo];
+
+        assignedUsers.forEach((assignedUser) => {
           if (userTaskMap[assignedUser._id]) {
             userTaskMap[assignedUser._id].tasksCount += 1;
-          } else if (task.status === "In Progress") {
-            userTaskMap[assignedUser._id].inProgressTasks += 1;
-          } else if (task.status === "Completed") {
-            userTaskMap[assignedUser._id].completedTasks += 1;
+
+            if (task.status === "Not Started") {
+              userTaskMap[assignedUser._id].pendingTasks += 1;
+            } else if (task.status === "In Progress") {
+              userTaskMap[assignedUser._id].inProgressTasks += 1;
+            } else if (task.status === "Completed") {
+              userTaskMap[assignedUser._id].completedTasks += 1;
+            }
           }
         });
       }
@@ -97,15 +107,14 @@ const exportUsersReport = async (req, res) => {
     worksheet.columns = [
       { header: "User Name", key: "name", width: 30 },
       { header: "Email", key: "email", width: 40 },
-      { header: "Total Assigned Tasks", key: "taskCount", width: 20 },
+      { header: "Total Assigned Tasks", key: "tasksCount", width: 20 },
       { header: "Pending Tasks", key: "pendingTasks", width: 20 },
-      { header: "In Progress Tasks", key: "InProgressTasks", width: 20 },
-      { header: "Completed Tasks", key: "CompletedTasks", width: 20 },
+      { header: "In Progress Tasks", key: "inProgressTasks", width: 20 },
+      { header: "Completed Tasks", key: "completedTasks", width: 20 },
     ];
 
-    Object.values(userTaskMap).forEach((user) => {
-      worksheet.addRow(user);
-    });
+    Object.values(userTaskMap).forEach((user) => worksheet.addRow(user));
+
     res.setHeader(
       "Content-Type",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -114,9 +123,8 @@ const exportUsersReport = async (req, res) => {
       "Content-Disposition",
       `attachment; filename="UserTaskReport.xlsx"`
     );
-    return worksheet.xlsx.write(res).then(() => {
-      res.end();
-    });
+
+    return workbook.xlsx.write(res).then(() => res.end());
   } catch (error) {
     return res
       .status(500)

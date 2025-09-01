@@ -2,24 +2,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 :root {
-  --primary-color: #6fc5ff; /* Soft Sky Blue */
+  --primary-color: #38adfc; /* Soft Sky Blue */
   --secondary-color: #b0e0e6; /* Pale Turquoise */
   --background-color: #f9f9f9; /* Almost white */
   --background-surface: #eaeaea; /* Light grey for cards/surfaces */
   --text-color: #222; /* Slightly off-black for better readability */
-  --text-color-light: #666; /* Muted grey for secondary text */
+  --text-color-light: #3a3a3a; /* Muted grey for secondary text */
 
   --font-display: "Plus Jakarta Sans", sans-serif; /* Clean, modern font */
   --breakpoint-3xl: 1920px;
 }
 
 .dark {
-  --primary-color: #6fc5ff; /* Keep primary color same for contrast */
+  --primary-color: #38adfc; /* Keep primary color same for contrast */
   --secondary-color: #4682b4; /* Steel Blue for contrast in dark */
   --background-color: #121212; /* Dark background */
   --background-surface: #1e1e1e; /* Slightly lighter than bg */
   --text-color: #f1f1f1; /* Light text */
-  --text-color-light: #aaa; /* Subtle grey for muted text */
+  --text-color-light: #c7c7c7; /* Subtle grey for muted text */
 }
 
 @layer base {
@@ -31,18 +31,34 @@
     background-color: var(--background-color);
     font-family: var(--font-display);
     color: var(--text-color);
-    transition: all .5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     /* Consider removing this unless you *want* to block scroll */
   }
 
   .bg-color {
     background-color: var(--background-color);
   }
+  .border-color {
+    border-color: var(--background-color);
+  }
+  .border-color-surface {
+    border-color: var(--background-color);
+  }
+  .border-color-primary {
+    border-color: var(--primary-color);
+  }
   .bg-surface {
     background-color: var(--background-surface);
   }
   .bg-primary {
     background-color: var(--primary-color);
+  }
+  .bg-secondary {
+    background-color: var(--secondary-color);
+  }
+
+  .text-color-primary {
+    color: var(--primary-color);
   }
   .text-theme {
     color: var(--text-color);
@@ -54,7 +70,6 @@
   /* FONTS SIZE */
   .title-font-size {
     font-size: clamp(1.5rem, 2vw, 2rem);
-    color: var(--primary-color);
   }
 
   .headline-font-size {
@@ -66,10 +81,60 @@
   .metadata-font-size {
     font-size: clamp(0.9rem, 2vw, 1.1rem);
   }
+  .small-font-size {
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+  }
 
   .input-style {
     outline: none;
     border-bottom: 1px solid var(--primary-color);
+  }
+
+  .card-btn {
+    display: flex;
+    gap: 10px;
+    font-weight: 400;
+    background-color: var(--background-color);
+    /* padding: clamp(0.2rem, 2vw, 0.4rem) clamp(0.2rem, 2vw, 1rem); */
+    border-radius: 0.375rem; /* Tailwind's rounded-md */
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: var(--secondary-color);
+      border-color: transparent;
+    }
+  }
+
+  .card-btn-fill {
+    display: flex;
+    place-items: center;
+    gap: 10px;
+    background-color: var(--primary-color);
+    font-weight: 400;
+    border-radius: 0.375rem;
+    padding: 0.1rem 1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--secondary-color);
+      border-color: transparent;
+    }
+  }
+
+  .add-btn {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 400;
+    color: var(--primary-color);
+    white-space: nowrap;
+    background: var(--background-color);
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
   }
 }
 
@@ -77,5 +142,77 @@
   .shadow {
     box-shadow: inset 5px 5px 10px var(--background-surface),
       5px 5px 10px var(--background-surface);
+  }
+
+  .form-card {
+    background-color: bg-color;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--background-surface);
+  }
+
+  .form-input {
+    border: 1px solid var(--background-surface);
+    width: 100%;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    outline: none;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    padding: 8px 8px;
+    margin-top: 8px;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-color-light);
+  }
+
+  /* Date input calendar icon theming */
+  .form-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.4) brightness(0.8);
+    cursor: pointer;
+    transition: filter 0.2s ease;
+  }
+
+  .form-input[type="date"]:hover::-webkit-calendar-picker-indicator {
+    filter: invert(0.2) brightness(0.9);
+  }
+
+  /* Dark theme calendar icon */
+  .dark .form-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8) brightness(1.1);
+    cursor: pointer;
+  }
+
+  .dark .form-input[type="date"]:hover::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.2);
+  }
+
+  .download-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    background: rgb(217, 253, 117);
+    padding: 8px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--background-surface);
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      background-color: rgb(183, 255, 90);
+    }
+  }
+
+  .user-card {
+    background-color: var(--background-surface);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow:inset 2px 2px 5px var(--background-color), 2px 2px 5px var(--background-surface) ;
+    border-top: 2px solid var(--background-surface);
+    border-left: 2px solid var(--background-surface);
+    border-right: 2px solid var(--background-color);
+    border-bottom: 2px solid var(--background-color);
+    
   }
 }

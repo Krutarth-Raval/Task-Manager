@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { validateEmail } from "../../utils/helper";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import Input from "../../components/Inputs/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import { UserContext } from "../../Context/UserContext";
+import uploadImage from "../../utils/uploadImage";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -12,11 +16,16 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [adminInvitedToken, setAdminInvitedToken] = useState("");
 
+  const { updateUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
 
   //handle login form submit
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter a your full name");
@@ -30,9 +39,45 @@ const SignUp = () => {
       setError("Please enter the password");
       return;
     }
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
 
     setError("");
     //signup API call
+    try {
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || "";
+      }
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        name: fullName,
+        email,
+        password,
+        profileImageUrl,
+        adminInvitedToken,
+      });
+      const { token, role } = response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(response.data);
+
+        //redirect based on role
+        if (role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/user/dashboard");
+        }
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again");
+      }
+    }
   };
 
   return (
@@ -83,8 +128,7 @@ const SignUp = () => {
               />
             </div>{" "}
             <div className="w-full">
-
-            {error && <p className="text-red-500 mt-3 text-left">{error}</p>}
+              {error && <p className="text-red-500 mt-3 text-left">{error}</p>}
             </div>
             <div className="flex justify-center my-6">
               <button className="bg-primary w-max py-2 px-4 metadata-font-size dark:text-[#333] font-bold rounded-md hover:opacity-90 flex  ">
