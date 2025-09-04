@@ -37,7 +37,7 @@ const TodoListInput = ({ todoList, setTodoList }) => {
           placeholder="Enter Task"
           value={option}
           onChange={({ target }) => setOption(target.value)}
-          className="w-full small-font-size outline-none bg-color border-1 border-surface px-3 py-2 rounded-md "
+          className="w-full metadata-font-size outline-none bg-color border-1 border-surface px-3 py-2 rounded-md "
         />
         <button className="card-btn text-nowrap px-2 py-1.5" onClick={handleAddOption}>
             <HiMiniPlus className="description-font-size" /> Add

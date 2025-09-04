@@ -42,14 +42,14 @@ const AddAttachmentsInput = ({ setAttachments, attachments }) => {
 
       <div className="flex items-center gap-5 mt-4">
         <div className="flex-1 flex items-center gap-3 border border-surface rounded-md px-3 ">
-          <LuPaperclip className="text-color-light " />
+          <LuPaperclip className="text-color-primary " />
 
           <input
             type="text"
             placeholder="Add File Link"
             value={option}
             onChange={({ target }) => setOption(target.value)}
-            className="w-full small-font-size outline-none bg-color py-2 pl-1"
+            className="w-full metadata-font-size outline-none bg-color py-2 pl-1"
           />
         </div>
         <button

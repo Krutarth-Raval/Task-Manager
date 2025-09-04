@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
+import { UserContext } from "../../Context/userContext";
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
+import { Crown, Mail, Circle } from "lucide-react";
 
 /**
- * SideMenu component - shows the sidebar menu for admin or user
+ * Enhanced SideMenu component - shows the sidebar menu for admin or user
+ * - Beautiful glassmorphism design with modern animations
  * - Responsive for mobile and desktop
- * - Smooth transition on mobile (slide in/out)
+ * - Smooth transitions and hover effects
+ * - Enhanced user profile section
+ * - Proper fixed positioning and scrolling
  */
 const SideMenu = ({ activeMenu, isMobile = false, isOpen = true }) => {
   const { user, clearUser } = useContext(UserContext);
@@ -39,76 +43,105 @@ const SideMenu = ({ activeMenu, isMobile = false, isOpen = true }) => {
   }, [user]);
 
   return (
-    <div
-      className={`w-[250px] bg-surface p-2 flex flex-col gap-3 
-        transition-all duration-300 ease-in-out 
-        ${
-          isMobile
-            ? `fixed top-14 left-0 h-[100svh] z-50 overflow-y-auto shadow-lg ${
-                isOpen ? "ml-0" : "-ml-[250px]"
-              } lg:hidden`
-            : "hidden lg:block h-full"
-        }
-      `}
-    >
-      {/* ✅ User Profile Section */}
-      <div className="flex flex-col  items-start justify-center metadata-font-size py-3 px-2 gap-3 rounded-md  mb-3">
-        <div className="flex items-center gap-3 justify-center ">
-          <div className="w-18 h-18 rounded-full overflow-hidden border-2">
-            {user?.profileImageUrl ? (
-              <img
-                src={user.profileImageUrl}
-                alt="Profile"
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="h-full w-full bg-gray-300 flex items-center justify-center text-xs text-gray-600">
-                No Image
+    <>
+      {/* Mobile backdrop */}
+      {isMobile && isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => {}} // This should be handled by parent component
+        />
+      )}
+
+      {/* Sidebar Container */}
+      <div
+        className={`
+          ${
+            isMobile
+              ? `fixed top-18 left-0 w-80 h-[calc(100vh-4rem)] z-50 transition-transform duration-300 ease-out lg:hidden ${
+                  isOpen ? "translate-x-0" : "-translate-x-full"
+                }`
+              : "w-full h-full"
+          }
+        `}
+      >
+        <div className="sidebar-container w-full h-full flex flex-col overflow-hidden">
+          {/* Enhanced User Profile Section - Fixed at top */}
+          <div className="profile-card flex-shrink-0">
+            <div className="flex items-center gap-4 mb-3">
+              {/* Enhanced profile image */}
+              <div className="profile-image-wrapper">
+                {user?.profileImageUrl ? (
+                  <img
+                    src={user.profileImageUrl}
+                    alt="Profile"
+                    className="profile-image"
+                  />
+                ) : (
+                  <div className="profile-placeholder">No Image</div>
+                )}
               </div>
-            )}
+
+              {/* User info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="font-bold text-sm uppercase truncate text-gradient-primary">
+                    {user?.name || "User"}
+                  </h3>
+                  {user?.role === "admin" && (
+                    <div className="admin-badge">
+                      <Crown className="w-3 h-3" />
+                      <span>Admin</span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs text-color-light truncate opacity-80">
+                  {user?.role || "User"}
+                </p>
+              </div>
+            </div>
+
+            {/* Email badge */}
+            <div className="email-badge">
+              <div className="flex items-center gap-2">
+                <Mail className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate text-xs">
+                  {user?.email || "email@example.com"}
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex gap-1 flex-col ">
-            <p className="font-semibold small-font-size uppercase text-left">
-              {user?.name || ""}
-            </p>
-            {/* Admin badge */}
-            {user?.role === "admin" && (
-              <div className="font-bold rounded-md small-font-size text-theme  bg-secondary w-max px-1 ">
-                Admin
-              </div>
-            )}
-          
-          </div>
-        </div>  <p className="font-light small-font-size  text-color-light w-full bg-color p-1 rounded-md">
-              {user?.email || ""}
-            </p>
-      </div>
+          {/* Enhanced Menu Items - Scrollable */}
+          <nav className="flex-1 overflow-y-auto px-3 py-2">
+            <div className="space-y-1">
+              {sideMenuData.map((item, index) => {
+                const isActive = activeMenu === item.label;
 
-      {/* ✅ Sidebar Menu Items */}
-      <div className="flex flex-col gap-2 p-2">
-        {sideMenuData.map((item, index) => {
-          const isActive = activeMenu === item.label;
+                return (
+                  <button
+                    key={`menu_${index}`}
+                    onClick={() => handleClick(item.path)}
+                    className={`menu-item group w-full ${isActive ? "active" : ""}`}
+                  >
+                    <div className="menu-icon-wrapper">
+                      <item.icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+                    </div>
+                    <span className="font-medium truncate transition-all duration-300">
+                      {item.label}
+                    </span>
 
-          return (
-            <button
-              key={`menu_${index}`}
-              onClick={() => handleClick(item.path)}
-              className={`flex items-center gap-3 metadata-font-size p-2 cursor-pointer rounded-md transition-all duration-200
-                ${
-                  isActive
-                    ? "text-theme border-r-4 border-[#6fc5ff] bg-[#6fc5ff10] font-bold"
-                    : "text-color-light hover:bg-[#6fc5ff10] hover:border-r-4 hover:border-[#6fc5ff]"
-                }
-              `}
-            >
-              <item.icon className="flex-shrink-0" />
-              <span className="truncate">{item.label}</span>
-            </button>
-          );
-        })}
+                    {/* Active indicator line */}
+                    {isActive && (
+                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-white/50 to-white/20 rounded-l-full"></div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

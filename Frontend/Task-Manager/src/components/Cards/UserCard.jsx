@@ -1,77 +1,102 @@
 import React, { useState } from "react";
+import { 
+  Crown, 
+  Shield, 
+  Star, 
+  MoreVertical, 
+  Mail, 
+  Calendar,
+  TrendingUp,
+  Clock,
+  CheckCircle2,
+  AlertCircle
+} from "lucide-react";
 
 const UserCard = ({ userInfo }) => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const totalTasks = (userInfo.pendingTasks || 0) + (userInfo.inProgressTasks || 0) + (userInfo.completedTasks || 0);
+  const completionRate = totalTasks > 0 ? Math.round(((userInfo.completedTasks || 0) / totalTasks) * 100) : 0;
+
   return (
-    <div className="user-card">
-      {/* User Info Section */}
-      <div className="flex items-center gap-3 mb-4">
-        {userInfo?.profileImageUrl ? (
-          <img
-            src={userInfo.profileImageUrl}
-            alt={`${userInfo?.name} avatar`}
-            className="w-12 h-12 rounded-full border-2 border-color-surface object-cover"
-          />
-        ) : (
-          <div className="w-12 h-12 rounded-full border-2 border-color-surface bg-surface flex items-center justify-center">
-            <span className="metadata-font-size font-semibold text-color-light">
-              {userInfo?.name?.charAt(0)?.toUpperCase() || '?'}
-            </span>
+    <div className="user-card group hover:shadow-lg transition-all duration-300 overflow-hidden">
+      {/* Header Section */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center md:flex-col gap-3 flex-1 min-w-0">
+          <div className="relative">
+            <img
+              src={userInfo.profileImageUrl || "/default-avatar.png"}
+              alt={userInfo?.name}
+              className="w-12 h-12 md:w-20 md:h-20 rounded-full border-3 border-color-primary object-cover"
+            />
           </div>
-        )}
-        <div>
-          <h3 className="metadata-font-size font-semibold text-theme">
-            {userInfo?.name}
-          </h3>
-          <p className="small-font-size text-color-light">
-            {userInfo?.email}
-          </p>
+          
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="metadata-font-size font-semibold text-theme truncate md:text-center w-full">
+                {userInfo?.name}
+              </h3>
+              
+            </div>
+            <p className="small-font-size text-color-light truncate flex items-center gap-1 bg-surface md:text-center w-full p-2 rounded-lg">
+              {userInfo?.email}
+            </p>
+            
+          </div>
         </div>
       </div>
 
+  
+
+     
+      {/* Task Breakdown */}
       <div className="border-t border-color-surface pt-4">
-        <div className="space-y-3">
+        <div className="space-y-2">
           <TaskStat 
             label="Not Started" 
             count={userInfo?.pendingTasks || 0} 
-            status="Not Started"
+            icon={AlertCircle}
+            color="text-red-500"
+            bgColor="bg-red-500"
           />
           <TaskStat 
             label="In Progress" 
             count={userInfo?.inProgressTasks || 0} 
-            status="In Progress"
+            icon={Clock}
+            color="text-amber-500"
+            bgColor="bg-amber-500"
           />
           <TaskStat 
             label="Completed" 
             count={userInfo?.completedTasks || 0} 
-            status="Completed"
+            icon={CheckCircle2}
+            color="text-green-500"
+            bgColor="bg-green-500"
           />
         </div>
       </div>
+
+     
     </div>
   );
 };
-export default UserCard
-const TaskStat = ({ label, count, status }) => {
-  const getStatusColor = () => {
-    switch (status) {
-      case "In Progress":
-        return "text-cyan-500";
-      case "Completed":
-        return "text-indigo-500";
-      default:
-        return "text-violet-500";
-    }
-  };
 
+// Enhanced TaskStat Component
+const TaskStat = ({ label, count, icon: Icon, color, bgColor }) => {
   return (
-    <div className="flex items-center justify-between py-2">
-      <span className="small-font-size font-medium text-theme">{label}</span>
+    <div className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
       <div className="flex items-center gap-2">
-        <span className={`small-font-size font-bold ${getStatusColor()}`}>
+        <Icon className={`w-4 h-4 ${color} group-hover:scale-110 transition-transform`} />
+        <span className="small-font-size font-medium text-theme">{label}</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className={`small-font-size font-bold ${color}`}>
           {count}
         </span>
-        <div className={`w-2 h-2 rounded-full ${getStatusColor().replace('text-', 'bg-')}`}></div>
+        <div className={`w-2 h-2 rounded-full ${bgColor} group-hover:scale-125 transition-transform`}></div>
       </div>
     </div>
   );
 };
+
+export default UserCard;

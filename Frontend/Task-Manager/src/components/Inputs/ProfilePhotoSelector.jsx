@@ -30,7 +30,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
     accept="image/*"
     ref={inputRef}
     onChange={handleImageChange}
-    className="hidden"/>
+    className="hidden" />
 
     {!image ? (
         <div className="border-2 h-25 w-25 relative  rounded-full">

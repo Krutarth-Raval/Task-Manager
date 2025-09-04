@@ -53,7 +53,7 @@ const CustomBarChart = ({ data }) => {
   }
 
   return (
-    <div className="bg-surface mt-6 p-2 rounded-md ">
+    <div className="bg-surface mt-6 p-5 rounded-md ">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           {/* Grid background */}

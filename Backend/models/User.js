@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    name: { type: String, require: true },
-    email: { type: String, require: true, unique: true },
-    password: { type: String, require: true },
-    profileImageUrl: { type: String, default: null },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    profileImageUrl: {
+      type: String,
+      default:
+        "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+    },
     role: { type: String, enum: ["admin", "member"], default: "member" },
   },
   { timestamps: true }
