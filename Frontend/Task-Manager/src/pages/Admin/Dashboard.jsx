@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "/src/utils/axiosInstance";
+import { axiosInstance } from "../../utils/apiClient";
 import { API_PATHS } from "../../utils/apiPaths";
 import { addThousandSeparator } from "../../utils/helper";
 import moment from "moment";

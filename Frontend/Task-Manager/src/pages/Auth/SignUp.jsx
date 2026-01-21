@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { validateEmail } from "../../utils/helper";
-import { axiosInstance } from "/src/utils/axiosInstance";
+import { axiosInstance } from "../../utils/apiClient";
 import { API_PATHS } from "../../utils/apiPaths";
 import uploadImage from "../../utils/uploadImage";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, CheckCircle2, AlertCircle, Loader2, Shield, Key } from "lucide-react";

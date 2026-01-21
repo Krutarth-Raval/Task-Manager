@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "/src/utils/axiosInstance";
+import { axiosInstance } from "../../utils/apiClient";
 import { API_PATHS } from "../../utils/apiPaths";
 import TaskStatusTabs from "../../components/TaskStatusTabs";
 import TaskCard from "../../components/Cards/TaskCard";
