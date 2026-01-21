@@ -1,7 +1,6 @@
 import React from "react";
-import ThemeToggle from "../UI/ThemeToggle";
 import HeroInvite from "../UI/HeroInvite";
-import { Shield, Sparkles } from "lucide-react";
+import { Shield } from "lucide-react";
 
 const AuthLayout = ({ children }) => {
   return (

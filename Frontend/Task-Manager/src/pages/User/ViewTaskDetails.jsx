@@ -6,7 +6,6 @@ import DashboardLayout from "../../components/Layout/DashboardLayout";
 import moment from "moment";
 import AvatarGroup from "../../components/AvatarGroup";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
-import { Dice1 } from "lucide-react";
 const ViewTaskDetails = () => {
   const { id } = useParams();
   const [task, setTask] = useState(null);

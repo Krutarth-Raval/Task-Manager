@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import { 
-  Crown, 
-  Shield, 
-  Star, 
-  MoreVertical, 
-  Mail, 
-  Calendar,
-  TrendingUp,
+import {
   Clock,
   CheckCircle2,
   AlertCircle

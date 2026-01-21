@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import {EyeClosed, Eye} from "lucide-react"
+import React from "react";
 
 const Input = ({ value, onChange, label, placeholder, type }) => {
   const [showPassword, setShowPassword] = useState(false);

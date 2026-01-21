@@ -1,4 +1,3 @@
-
 import {LayoutDashboard,ClipboardList,UserRound,Plus,LogOut} from "lucide-react"
 export const SIDE_MENU_DATA = [
   {
