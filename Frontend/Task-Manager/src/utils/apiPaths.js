@@ -1,4 +1,4 @@
-export const BASE_URL = "https://task-manager-chfm.onrender.com";
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
 //utils/apiPath.js
 export const API_PATHS = {
