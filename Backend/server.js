@@ -13,9 +13,14 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: [
+      process.env.CLIENT_URL,
+      "https://task-manager-web-services.vercel.app",
+      "https://task-manager-web-service.vercel.app"
+    ].filter(Boolean),
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
   })
 );
 
