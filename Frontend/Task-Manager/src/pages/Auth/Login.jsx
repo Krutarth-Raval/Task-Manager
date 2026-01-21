@@ -3,9 +3,9 @@ import AuthLayout from "../../components/Layout/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import { API_PATHS } from "../../utils/apiPaths";
-import axiosInstance from "../utils/axiosInstance";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { UserContext } from "../../_Context/UserContext";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
   const [email, setEmail] = useState("");
