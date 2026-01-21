@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/Layout/AuthLayout";
+import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import { validateEmail } from "../../utils/helper";
 import { axiosInstance } from "../../utils/apiClient";
 import { API_PATHS } from "../../utils/apiPaths";

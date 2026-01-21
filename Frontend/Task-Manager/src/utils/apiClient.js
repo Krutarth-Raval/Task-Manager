@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./apiPaths";
 
-// Force Vercel rebuild - fixed useNavigate import issues
+// Force Vercel rebuild - fixed ProfilePhotoSelector import
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
