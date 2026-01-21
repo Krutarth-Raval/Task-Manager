@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
-import axiosInstance from "../../utils/axiosInstance";
+import { axiosInstance } from "/src/utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { Users, Search, Filter } from "lucide-react";

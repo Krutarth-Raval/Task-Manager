@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./apiPaths";
- // Force Vercel rebuild - attempt 3
 
+// Force Vercel rebuild - new apiClient file
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
@@ -12,7 +12,6 @@ const axiosInstance = axios.create({
 });
 
 //request interceptor
-
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("token");
@@ -29,7 +28,6 @@ axiosInstance.interceptors.request.use(
 );
 
 //response interceptor
-
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
