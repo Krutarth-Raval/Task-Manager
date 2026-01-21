@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-import { API_PATHS, axiosInstance } from "../../utils";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import {  Plus, Filter, Search, Grid3X3, List, Calendar, Clock, TrendingUp, Users } from "lucide-react";
 import TaskStatusTabs from "../../components/TaskStatusTabs";

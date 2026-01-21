@@ -21,7 +21,8 @@ import AddAttachmentsInput from "../../components/Inputs/AddAttachmentsInput";
 import Modal from "../../components/Modal";
 import DeleteAlert from "../../components/DeleteAlert";
 
-import { API_PATHS, axiosInstance } from "../../utils";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 import { PRIORITY_DATA } from "../../utils/data";
 
