@@ -1,4 +1,6 @@
 export * from './apiPaths';
-export { default as axiosInstance } from './axiosInstance';
+import axiosInstance from './axiosInstance';
+export { axiosInstance };
 export * from './helper';
-export { default as uploadImage } from './uploadImage';
+import uploadImage from './uploadImage';
+export { uploadImage };
