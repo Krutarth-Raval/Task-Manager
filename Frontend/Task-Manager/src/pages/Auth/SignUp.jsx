@@ -4,6 +4,7 @@ import { validateEmail } from "../../utils/helper";
 import { axiosInstance } from "../../utils/apiClient";
 import { API_PATHS } from "../../utils/apiPaths";
 import uploadImage from "../../utils/uploadImage";
+import { Link, useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, CheckCircle2, AlertCircle, Loader2, Shield, Key } from "lucide-react";
 import defaultUserImage from "../../assets/UserDefaultImage.png";
 import { UserContext } from "../../_Context/UserContext";
