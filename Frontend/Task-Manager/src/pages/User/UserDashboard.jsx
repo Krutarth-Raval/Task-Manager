@@ -1,7 +1,6 @@
 import CustomPieChart from "../../components/Charts/CustomPieChart";
 import React, { useContext, useEffect, useState } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
-import { UserContext } from "../../Context/UserContext";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
@@ -12,6 +11,7 @@ import { addThousandSeparator } from "../../utils/helper";
 import TaskListTable from "../../components/Layout/TaskListTable";
 import { ChevronRight } from "lucide-react";
 import CustomBarChart from "../../components/Charts/CustomBarChart";
+import { UserContext } from "../../_Context/UserContext";
 
 const COLORS = ['#8D51FF', '#00B8DB', '#7BCE00']
 

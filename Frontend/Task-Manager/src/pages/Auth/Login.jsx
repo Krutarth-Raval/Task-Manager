@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../utils/axiosInstance";
-import { UserContext } from "../../Context/UserContext";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { UserContext } from "../../_Context/UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");

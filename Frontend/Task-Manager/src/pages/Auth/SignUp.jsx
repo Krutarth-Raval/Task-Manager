@@ -6,10 +6,10 @@ import Input from "../../components/Inputs/Input";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
-import { UserContext } from "../../Context/UserContext";
 import uploadImage from "../../utils/uploadImage";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, CheckCircle2, AlertCircle, Loader2, Shield, Key } from "lucide-react";
 import defaultUserImage from "../../assets/UserDefaultImage.png";
+import { UserContext } from "../../_Context/UserContext";
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
