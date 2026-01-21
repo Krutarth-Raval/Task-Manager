@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../Context/userContext";
+import { UserContext } from "../../Context/UserContext";
 import Navbar from "./Navbar";
 import SideMenu from "./SideMenu";
 

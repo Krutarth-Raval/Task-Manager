@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../Context/userContext";
+import { UserContext } from "../../Context/UserContext";
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
 import { Crown, Mail, Circle } from "lucide-react";
 
