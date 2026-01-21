@@ -3,11 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
+import { API_PATHS, axiosInstance, addThousandSeparator } from "../../utils";
 import moment from "moment";
 import InfoCard from "../../components/Cards/InfoCard";
-import { addThousandSeparator } from "../../utils/helper";
 import TaskListTable from "../../components/Layout/TaskListTable";
 import {
   ChevronRight,

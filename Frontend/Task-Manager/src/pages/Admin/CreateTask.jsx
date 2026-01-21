@@ -21,9 +21,9 @@ import AddAttachmentsInput from "../../components/Inputs/AddAttachmentsInput";
 import Modal from "../../components/Modal";
 import DeleteAlert from "../../components/DeleteAlert";
 
+import { API_PATHS, axiosInstance } from "../../utils";
+
 import { PRIORITY_DATA } from "../../utils/data";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
 
 // Constants
 const INITIAL_TASK_DATA = {

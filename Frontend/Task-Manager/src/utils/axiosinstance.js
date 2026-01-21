@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./apiPaths";
+import { BASE_URL } from "./index";
  // Added a comment to force Vercel re-build
 
 const axiosInstance = axios.create({

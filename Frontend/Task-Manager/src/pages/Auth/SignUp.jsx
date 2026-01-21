@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/Layout/AuthLayout";
-import { validateEmail } from "../../utils/helper";
-import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
-import Input from "../../components/Inputs/Input";
-import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
-import uploadImage from "../../utils/uploadImage";
+import { validateEmail, axiosInstance, API_PATHS, uploadImage } from "../../utils";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, CheckCircle2, AlertCircle, Loader2, Shield, Key } from "lucide-react";
 import defaultUserImage from "../../assets/UserDefaultImage.png";
 import { UserContext } from "../../_Context/UserContext";

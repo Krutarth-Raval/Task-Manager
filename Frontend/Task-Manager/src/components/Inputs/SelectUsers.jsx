@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPaths";
+import { API_PATHS, axiosInstance } from "../../utils";
 import { LucideUsers, LucideChevronDown, Check, Crown, Shield, Star, Search, X } from "lucide-react";
 import Modal from "../Modal";
 
