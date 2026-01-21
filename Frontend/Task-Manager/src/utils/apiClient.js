@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "./apiPaths";
 
-// Force Vercel rebuild - final attempt with relative imports
+// Force Vercel rebuild - fixed React import issues
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
