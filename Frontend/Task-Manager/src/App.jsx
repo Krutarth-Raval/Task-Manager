@@ -19,8 +19,9 @@ import ManageUsers from "./pages/Admin/ManageUsers";
 import UserDashboard from "./pages/User/UserDashboard";
 import MyTask from "./pages/User/MyTask";
 import ViewTaskDetails from "./pages/User/ViewTaskDetails";
-import UserProvider, { UserContext } from "./Context/UserContext";
+
 import { Toaster } from "react-hot-toast";
+import UserProvider, { UserContext } from "./Context/UserContext";
 
 const App = () => {
   return (
