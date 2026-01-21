@@ -15,7 +15,7 @@ import {
 
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import SelectDropdown from "../../components/Inputs/SelectDropdown";
-import SelectUsers from "../../components/Inputs/selectUsers";
+import SelectUsers from "../../components/Inputs/SelectUsers";
 import TodoListInput from "../../components/Inputs/todoListInput";
 import AddAttachmentsInput from "../../components/Inputs/AddAttachmentsInput";
 import Modal from "../../components/Modal";
