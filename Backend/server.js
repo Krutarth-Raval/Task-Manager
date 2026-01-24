@@ -16,7 +16,8 @@ app.use(
     origin: [
       process.env.CLIENT_URL,
       "https://task-manager-web-services.vercel.app",
-      "https://task-manager-web-service.vercel.app"
+      "https://task-manager-web-service.vercel.app",
+      "http://localhost:5173"
     ].filter(Boolean),
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
