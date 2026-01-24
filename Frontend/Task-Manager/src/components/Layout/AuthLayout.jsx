@@ -71,7 +71,7 @@ const AuthLayout = ({ children }) => {
               </div>
             </div>
 
-            
+
           </div>
         </header>
 
@@ -83,31 +83,7 @@ const AuthLayout = ({ children }) => {
       </div>
 
       {/* Custom animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0.7;
-          }
-          25% {
-            transform: translateY(-10px) translateX(5px);
-            opacity: 1;
-          }
-          50% {
-            transform: translateY(-5px) translateX(-5px);
-            opacity: 0.8;
-          }
-          75% {
-            transform: translateY(-15px) translateX(3px);
-            opacity: 0.9;
-          }
-        }
 
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };
